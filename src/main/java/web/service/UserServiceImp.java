@@ -6,6 +6,7 @@ import web.dao.UserDAO;
 import web.entity.User;
 
 import java.util.List;
+
 @Service
 public class UserServiceImp implements UserService {
     private final UserDAO userDAO;
@@ -40,5 +41,7 @@ public class UserServiceImp implements UserService {
 
     @Override
     @Transactional
-    public void update(int id, User updateUser) {userDAO.update(id,updateUser);}
+    public void update(User updateUser) {
+        userDAO.update(updateUser);
+    }
 }

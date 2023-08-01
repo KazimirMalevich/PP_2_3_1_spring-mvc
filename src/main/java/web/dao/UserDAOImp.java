@@ -11,6 +11,7 @@ import java.util.List;
 public class UserDAOImp implements UserDAO {
     @PersistenceContext
     private EntityManager entityManager;
+
     @Override
     public List<User> getAllUsers() {
         return entityManager.createQuery("from User ", User.class).getResultList();
@@ -18,8 +19,7 @@ public class UserDAOImp implements UserDAO {
 
     @Override
     public void saveUser(User user) {
-   entityManager.persist(user);
-   entityManager.flush();
+        entityManager.persist(user);
     }
 
     @Override
@@ -34,14 +34,11 @@ public class UserDAOImp implements UserDAO {
             throw new NullPointerException("User not found");
         }
         entityManager.remove(user);
-        entityManager.flush();
         return user;
     }
 
     @Override
-    public void update(int id, User updateUser) {
-        User userToBeUpdated = getUser(id);
-        userToBeUpdated.setName(updateUser.getName());
-        userToBeUpdated.setSurname(updateUser.getSurname());
+    public void update(User updateUser) {
+        entityManager.merge(updateUser);
     }
 }

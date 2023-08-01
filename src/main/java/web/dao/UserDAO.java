@@ -5,13 +5,14 @@ import web.entity.User;
 import java.util.List;
 
 public interface UserDAO {
-    public List<User> getAllUsers();
 
-    public void saveUser(User user);
+    List<User> getAllUsers();
 
-    public User getUser(int id);
+    void saveUser(User user);
 
-    public User deleteUser(int id);
+    User getUser(int id);
 
-    public void update(int id, User updateUser);
+    User deleteUser(int id);
+
+    void update(User updateUser);
 }

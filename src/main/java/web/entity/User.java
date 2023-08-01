@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.util.Objects;
 
 @Entity
 @Table(name = "users")
@@ -25,7 +26,6 @@ public class User {
     public User(String name, String surname) {
         this.name = name;
         this.surname = surname;
-
     }
 
     public int getId() {
@@ -52,5 +52,17 @@ public class User {
         this.surname = surname;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof User)) return false;
+        User user = (User) o;
+        return id == user.id && Objects.equals(name, user.name) && Objects.equals(surname, user.surname);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, surname);
+    }
 }
 

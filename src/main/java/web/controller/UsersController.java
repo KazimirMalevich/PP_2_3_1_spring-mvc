@@ -19,27 +19,30 @@ import java.util.List;
 @RequestMapping("/")
 public class UsersController {
     private final UserService userService;
+
     @Autowired
-    public UsersController(UserService userService){
+    public UsersController(UserService userService) {
         this.userService = userService;
     }
+
     @GetMapping("/")
     public String index(Model model) {
-//        model.addAttribute("users", userService.getAllUsers());
-
         List<User> allUsers = userService.getAllUsers();
         model.addAttribute("allUsers", allUsers);
         return "users";
     }
+
     @GetMapping("/new")
     public String newUser(@ModelAttribute("user") User user) {
         return "new";
     }
+
     @PostMapping()
     public String create(@ModelAttribute("user") User user) {
         userService.saveUser(user);
         return "redirect:/";
     }
+
     @GetMapping("/{id}/edit")
     public String edit(Model model, @PathVariable("id") int id) {
         model.addAttribute("user", userService.getUser(id));
@@ -47,13 +50,12 @@ public class UsersController {
     }
 
     @PatchMapping("/{id}")
-    public String update(@ModelAttribute("user") User user, @PathVariable("id") int id) {
-        userService.update(id, user);
+    public String update(@ModelAttribute("user") User user) {
+        userService.update(user);
         return "redirect:/";
     }
 
     @DeleteMapping("/{id}")
-//    @RequestMapping("/deleteUser")
     public String delete(@PathVariable("id") int id) {
         userService.deleteUser(id);
         return "redirect:/";

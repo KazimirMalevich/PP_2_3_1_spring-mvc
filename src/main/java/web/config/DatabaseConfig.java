@@ -22,7 +22,6 @@ import java.beans.PropertyVetoException;
 @EnableTransactionManagement
 @PropertySource("classpath:db.properties")
 public class DatabaseConfig {
-
     private final Environment env;
 
     public DatabaseConfig(Environment env) {

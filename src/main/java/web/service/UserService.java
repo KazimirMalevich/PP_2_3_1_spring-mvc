@@ -5,10 +5,13 @@ import web.entity.User;
 import java.util.List;
 
 public interface UserService {
-    public List<User> getAllUsers();
+    List<User> getAllUsers();
 
-    public void saveUser(User user);
-    public User getUser(int id);
-    public User deleteUser(int id);
-    public void update(int id, User updateUser);
+    void saveUser(User user);
+
+    User getUser(int id);
+
+    User deleteUser(int id);
+
+    void update(User updateUser);
 }
